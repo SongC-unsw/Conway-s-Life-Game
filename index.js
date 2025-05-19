@@ -1,6 +1,6 @@
 const rows = 100;
 const cols = 100;
-const density = 0.1;
+let density = 0.1;
 const cellSize = 6;
 const fps = 10;
 
@@ -68,6 +68,17 @@ const main = () => {
   pauseBtn.innerText = "Pause";
   pauseBtn.className = "btn btn-danger";
   document.body.appendChild(pauseBtn);
+  const densityButton = document.getElementById("density-submit-btn");
+  const densityInput = document.getElementById("density-input");
+  densityButton.addEventListener("click", () => {
+    const newDensity = parseFloat(densityInput.value);
+    if (!isNaN(newDensity) && newDensity >= 0 && newDensity <= 1) {
+      density = newDensity;
+      // use new density to rerender
+      grid = createGrid();
+      drawGrid(grid, ctx, canvas);
+    }
+  });
 
   const ctx = canvas.getContext("2d");
 
