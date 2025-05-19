@@ -64,6 +64,10 @@ const main = () => {
   canvas.width = cols * cellSize;
   canvas.height = rows * cellSize;
   document.body.appendChild(canvas);
+  const pauseBtn = document.createElement("button");
+  pauseBtn.innerText = "Pause";
+  pauseBtn.className = "btn btn-danger";
+  document.body.appendChild(pauseBtn);
 
   const ctx = canvas.getContext("2d");
 
@@ -71,8 +75,10 @@ const main = () => {
   let isRunning = true;
 
   // add stop and pause function
-  canvas.addEventListener("click", () => {
+  pauseBtn.addEventListener("click", () => {
     isRunning = !isRunning;
+    pauseBtn.innerText = isRunning ? "Pause" : "Resume";
+    pauseBtn.className = isRunning ? "btn btn-danger" : "btn btn-success";
     if (isRunning) {
       animate();
     }
